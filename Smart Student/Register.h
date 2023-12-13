@@ -1,4 +1,6 @@
 #pragma once
+#include "MM.h"
+
 
 namespace SmartStudent {
 
@@ -307,11 +309,51 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		MessageBox::Show("Passwords do not match");
 	}
 	else {
-		String^ constring = L"Data Source=SASINDU_MALHARA;Initial Catalog=SmartStudent;Integrated Security=True";
-		SqlConnection^ conDataBase = gcnew SqlConnection(constring);
-		SqlCommand^ cmdDataBase = gcnew SqlCommand("insert into dbo.users (first_name,last_name,username,password) values('" + this->textBox1->Text + "','" + this->textBox2->Text + "','" + this->textBox3->Text + "','" + this->textBox4->Text + "');", conDataBase);
+		String^ connstr = "Data Source=SASINDU_MALHARA;Initial Catalog=smartstudent;Integrated Security=True";
+		SqlConnection^ connection = gcnew SqlConnection(connstr);
+		connection->Open();
 
-		this->Hide();
+		// Check if the email is already used
+		String^ checkEmailQuery = "SELECT COUNT(*) FROM users WHERE username = @Email";
+		SqlCommand^ checkEmailCommand = gcnew SqlCommand(checkEmailQuery, connection);
+		checkEmailCommand->Parameters->AddWithValue("@Email", textBox3->Text);
+
+		int emailCount = Convert::ToInt32(checkEmailCommand->ExecuteScalar());
+		
+			if (textBox3->Text->Contains("@eng.jfn.ac.lk")) {
+
+				if (emailCount > 0) {
+					// Email is already used, show a message
+					MessageBox::Show("Email already used. Please use a different email.");
+					return;
+				}
+				else {
+					// Email is not used, proceed with the insertion
+					String^ insertQuery = "INSERT INTO users(first_name, last_name, username, password) VALUES (@Fn, @Ln, @Un, @Pw)";
+					SqlCommand^ insertCommand = gcnew SqlCommand(insertQuery, connection);
+					insertCommand->Parameters->AddWithValue("@Fn", textBox1->Text);
+					insertCommand->Parameters->AddWithValue("@Ln", textBox2->Text);
+					insertCommand->Parameters->AddWithValue("@Un", textBox3->Text);
+					insertCommand->Parameters->AddWithValue("@Pw", textBox4->Text);
+					insertCommand->ExecuteNonQuery();
+
+					connection->Close();
+
+					MM^ menu = gcnew MM();
+					menu->Show();
+					this->Hide();
+				}
+
+				
+			}
+			else {
+				MessageBox::Show("Please enter a valid email address");
+				
+			}
+
+		
+
+		
 
 }
 };

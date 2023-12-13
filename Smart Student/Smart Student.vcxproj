@@ -121,11 +121,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LS.cpp" />
+    <ClCompile Include="MM.cpp" />
+    <ClCompile Include="MP.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="PP.cpp" />
     <ClCompile Include="Register.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LS.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MM.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MP.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MyForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="PP.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Register.h">
@@ -133,6 +149,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MM.resx">
+      <DependentUpon>MM.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>

@@ -21,12 +21,36 @@
     <ClCompile Include="Register.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Register.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

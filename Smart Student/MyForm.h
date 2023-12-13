@@ -1,5 +1,7 @@
 #pragma once
 #include "Register.h"
+#include "MM.h"
+
 namespace SmartStudent {
 
 	using namespace System;
@@ -80,6 +82,7 @@ namespace SmartStudent {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -90,7 +93,6 @@ namespace SmartStudent {
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox7))->BeginInit();
@@ -120,6 +122,15 @@ namespace SmartStudent {
 			resources->ApplyResources(this->panel1, L"panel1");
 			this->panel1->Name = L"panel1";
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint_1);
+			// 
+			// button2
+			// 
+			this->button2->BackColor = System::Drawing::Color::Black;
+			resources->ApplyResources(this->button2, L"button2");
+			this->button2->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->button2->Name = L"button2";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// button1
 			// 
@@ -178,15 +189,6 @@ namespace SmartStudent {
 			resources->ApplyResources(this->pictureBox2, L"pictureBox2");
 			this->pictureBox2->Name = L"pictureBox2";
 			this->pictureBox2->TabStop = false;
-			// 
-			// button2
-			// 
-			this->button2->BackColor = System::Drawing::Color::Black;
-			resources->ApplyResources(this->button2, L"button2");
-			this->button2->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->button2->Name = L"button2";
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// MyForm
 			// 
@@ -256,7 +258,8 @@ namespace SmartStudent {
 			DataTable^ dt = gcnew DataTable();
 			sda->Fill(dt);
 			if (dt->Rows->Count == 1) {
-				MessageBox::Show("Login Successful", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				MM^ menu = gcnew MM();
+				menu->Show();
 				this->Hide();
 
 			}
