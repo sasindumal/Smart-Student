@@ -111,7 +111,7 @@ namespace SmartStudent {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MaximizeBox = false;
 			this->Name = L"MM";
-			this->Text = L"Smart Student";
+			this->Text = L"SMART Student";
 			this->ResumeLayout(false);
 
 		}

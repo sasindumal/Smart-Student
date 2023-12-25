@@ -150,7 +150,6 @@ namespace SmartStudent {
 			this->linkLabel1->TabIndex = 35;
 			this->linkLabel1->TabStop = true;
 			this->linkLabel1->Text = L"Sign in";
-			this->linkLabel1->Click += gcnew System::EventHandler(this, &Register::linkLabel1_Click);
 			// 
 			// label1
 			// 
@@ -359,136 +358,131 @@ namespace SmartStudent {
 	}
 	private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-
+	
 	private: System::Void textBox1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		if (textBox1->Text == "First Name") {
 			textBox1->Text = "";
 		}
 	}
-	private: System::Void textBox2_Click_1(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox2->Text == "Last Name") {
-			textBox2->Text = "";
-		}
+private: System::Void textBox2_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox2->Text == "Last Name") {
+		textBox2->Text = "";
 	}
-	private: System::Void textBox3_Click_1(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox3->Text == "University E-mail") {
-			textBox3->Text = "";
-		}
+}
+private: System::Void textBox3_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox3->Text == "University E-mail") {
+		textBox3->Text = "";
 	}
-	private: System::Void textBox4_Click_1(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox4->Text == "Password") {
-			textBox4->Text = "";
-			textBox4->PasswordChar = '*';
-		}
+}
+private: System::Void textBox4_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox4->Text == "Password") {
+		textBox4->Text = "";
+		textBox4->PasswordChar = '*';
 	}
-	private: System::Void textBox5_Click_1(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox5->Text == "Confirm Password") {
-			textBox5->Text = "";
-			textBox5->PasswordChar = '*';
-		}
+}
+private: System::Void textBox5_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox5->Text == "Confirm Password") {
+		textBox5->Text = "";
+		textBox5->PasswordChar = '*';
 	}
-	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox1->Text == "" || textBox1->Text == "First Name") {
-			MessageBox::Show("Please enter your first name");
-		}
-		else if (textBox2->Text == "" || textBox2->Text == "Last Name") {
-			MessageBox::Show("Please enter your last name");
-		}
-		else if (textBox3->Text == "" || textBox3->Text == "University E-mail") {
-			MessageBox::Show("Please enter your university e-mail");
-		}
-		else if (textBox4->Text == "" || textBox4->Text == "Password") {
-			MessageBox::Show("Please enter your password");
-		}
-		else if (textBox5->Text == "" || textBox5->Text == "Confirm Password") {
-			MessageBox::Show("Please confirm your password");
-		}
-		else if (textBox4->Text != textBox5->Text) {
-			MessageBox::Show("Passwords do not match");
-		}
-		else {
-			String^ connstr = "Data Source=SASINDU_MALHARA;Initial Catalog=smartstudent;Integrated Security=True";
-			SqlConnection^ connection = gcnew SqlConnection(connstr);
-			connection->Open();
+}
+private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox1->Text == "" || textBox1->Text == "First Name") {
+		MessageBox::Show("Please enter your first name");
+	}
+	else if (textBox2->Text == "" || textBox2->Text == "Last Name") {
+		MessageBox::Show("Please enter your last name");
+	}
+	else if (textBox3->Text == "" || textBox3->Text == "University E-mail") {
+		MessageBox::Show("Please enter your university e-mail");
+	}
+	else if (textBox4->Text == "" || textBox4->Text == "Password") {
+		MessageBox::Show("Please enter your password");
+	}
+	else if (textBox5->Text == "" || textBox5->Text == "Confirm Password") {
+		MessageBox::Show("Please confirm your password");
+	}
+	else if (textBox4->Text != textBox5->Text) {
+		MessageBox::Show("Passwords do not match");
+	}
+	else {
+		String^ connstr = "Data Source=SASINDU_MALHARA;Initial Catalog=smartstudent;Integrated Security=True";
+		SqlConnection^ connection = gcnew SqlConnection(connstr);
+		connection->Open();
 
-			// Check if the email is already used
-			String^ checkEmailQuery = "SELECT COUNT(*) FROM users WHERE username = @Email";
-			SqlCommand^ checkEmailCommand = gcnew SqlCommand(checkEmailQuery, connection);
-			checkEmailCommand->Parameters->AddWithValue("@Email", textBox3->Text);
+		// Check if the email is already used
+		String^ checkEmailQuery = "SELECT COUNT(*) FROM users WHERE username = @Email";
+		SqlCommand^ checkEmailCommand = gcnew SqlCommand(checkEmailQuery, connection);
+		checkEmailCommand->Parameters->AddWithValue("@Email", textBox3->Text);
 
-			int emailCount = Convert::ToInt32(checkEmailCommand->ExecuteScalar());
+		int emailCount = Convert::ToInt32(checkEmailCommand->ExecuteScalar());
 
-			if (textBox3->Text->Contains("@eng.jfn.ac.lk")) {
+		if (textBox3->Text->Contains("@eng.jfn.ac.lk")) {
 
-				if (emailCount > 0) {
-					// Email is already used, show a message
-					MessageBox::Show("Email already used. Please use a different email.");
-					return;
-				}
-				else {
-					// Email is not used, proceed with the insertion
-					String^ insertQuery = "INSERT INTO users(first_name, last_name, username, password) VALUES (@Fn, @Ln, @Un, @Pw)";
-					SqlCommand^ insertCommand = gcnew SqlCommand(insertQuery, connection);
-					insertCommand->Parameters->AddWithValue("@Fn", textBox1->Text);
-					insertCommand->Parameters->AddWithValue("@Ln", textBox2->Text);
-					insertCommand->Parameters->AddWithValue("@Un", textBox3->Text);
-					insertCommand->Parameters->AddWithValue("@Pw", textBox4->Text);
-					insertCommand->ExecuteNonQuery();
-					connection->Close();
-
-					MM^ menu = gcnew MM();
-					menu->Show();
-					this->Hide();
-				}
-
-
+			if (emailCount > 0) {
+				// Email is already used, show a message
+				MessageBox::Show("Email already used. Please use a different email.");
+				return;
 			}
 			else {
-				MessageBox::Show("Please enter a valid email address");
+				// Email is not used, proceed with the insertion
+				String^ insertQuery = "INSERT INTO users(first_name, last_name, username, password) VALUES (@Fn, @Ln, @Un, @Pw)";
+				SqlCommand^ insertCommand = gcnew SqlCommand(insertQuery, connection);
+				insertCommand->Parameters->AddWithValue("@Fn", textBox1->Text);
+				insertCommand->Parameters->AddWithValue("@Ln", textBox2->Text);
+				insertCommand->Parameters->AddWithValue("@Un", textBox3->Text);
+				insertCommand->Parameters->AddWithValue("@Pw", textBox4->Text);
+				insertCommand->ExecuteNonQuery();
+				connection->Close();
 
+				MM^ menu = gcnew MM();
+				menu->Show();
+				this->Hide();
 			}
 
 
-
-
+		}
+		else {
+			MessageBox::Show("Please enter a valid email address");
 
 		}
-	};
 
 
 
-	private: System::Void textBox1_Leave(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox1->Text == "") {
-			textBox1->Text = "First Name";
-		}
+
 
 	}
-	private: System::Void textBox2_Leave(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox2->Text == "") {
-			textBox2->Text = "Last Name";
-		}
+};
+
+
+
+private: System::Void textBox1_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox1->Text == "") {
+		textBox1->Text = "First Name";
 	}
-	private: System::Void textBox3_Leave(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox3->Text == "") {
-			textBox3->Text = "University E-mail";
-		}
+
+}
+private: System::Void textBox2_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox2->Text == "") {
+		textBox2->Text = "Last Name";
 	}
-	private: System::Void textBox4_Leave(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox4->Text == "") {
-			textBox4->Text = "Password";
-			textBox4->PasswordChar = '\0';
-		}
+}
+private: System::Void textBox3_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox3->Text == "") {
+		textBox3->Text = "University E-mail";
 	}
-	private: System::Void textBox5_Leave(System::Object^ sender, System::EventArgs^ e) {
-		if (textBox5->Text == "") {
-			textBox5->Text = "Confirm Password";
-			textBox5->PasswordChar = '\0';
-		}
-	};
-	private: System::Void linkLabel1_Click(System::Object^ sender, System::EventArgs^ e) {
-		MM^ menu = gcnew MM();
-		menu->Show();
-		this->Hide();
+}
+private: System::Void textBox4_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox4->Text == "") {
+		textBox4->Text = "Password";
+		textBox4->PasswordChar = '\0';
 	}
+}
+private: System::Void textBox5_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (textBox5->Text == "") {
+		textBox5->Text = "Confirm Password";
+		textBox5->PasswordChar = '\0';
+}
+};
 };
 }

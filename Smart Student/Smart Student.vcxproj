@@ -149,11 +149,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LS.resx">
+      <DependentUpon>LS.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MM.resx">
       <DependentUpon>MM.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MP.resx">
+      <DependentUpon>MP.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PP.resx">
+      <DependentUpon>PP.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.h</DependentUpon>

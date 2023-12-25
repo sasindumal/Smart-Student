@@ -149,6 +149,7 @@ namespace SmartStudent {
 			this->textBox2->ForeColor = System::Drawing::Color::DimGray;
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Click += gcnew System::EventHandler(this, &MyForm::textBox2_Click);
+			this->textBox2->Leave += gcnew System::EventHandler(this, &MyForm::textBox2_Leave);
 			// 
 			// textBox1
 			// 
@@ -158,6 +159,7 @@ namespace SmartStudent {
 			this->textBox1->ForeColor = System::Drawing::Color::DimGray;
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Click += gcnew System::EventHandler(this, &MyForm::textBox1_Click);
+			this->textBox1->Leave += gcnew System::EventHandler(this, &MyForm::textBox1_Leave);
 			// 
 			// label1
 			// 
@@ -199,7 +201,6 @@ namespace SmartStudent {
 			this->Controls->Add(this->pictureBox1);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
 			this->Name = L"MyForm";
 			this->ShowInTaskbar = false;
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
@@ -279,5 +280,16 @@ namespace SmartStudent {
 		reg->Show();
 		this->Hide();
 	}
-	};
+	private: System::Void textBox1_Leave(System::Object^ sender, System::EventArgs^ e) {
+		if (textBox1->Text == "") {
+			textBox1->Text = "Username";
+		}
+	}
+	private: System::Void textBox2_Leave(System::Object^ sender, System::EventArgs^ e) {
+		if (textBox2->Text == "") {
+			textBox2->Text = "Password";
+			textBox2->PasswordChar = '\0';
+		}
+	}
+};
 }
