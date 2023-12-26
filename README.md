@@ -15,6 +15,7 @@
 
   <h3>Features:</h3>
     <ul>
+        <li><strong>Live Microsoft SQL database running for create and loging user accounts.</li>
         <li><strong>Learning Materials:</strong> Access lecture slides, past papers, and other relevant learning materials.</li>
         <li><strong>Progress Tracking:</strong> Keep track of your academic progress for each module.</li>
         <li><strong>Auto GPA Calculator:</strong> Get instant updates on your current GPA.</li>
