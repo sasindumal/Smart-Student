@@ -1,4 +1,6 @@
 #pragma once
+#include "GpaCalculatorForm.h"
+
 
 namespace SmartStudent {
 
@@ -37,6 +39,7 @@ namespace SmartStudent {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::LinkLabel^ linkLabel1;
+	private: System::Windows::Forms::Button^ button1;
 	protected:
 
 	private:
@@ -56,6 +59,7 @@ namespace SmartStudent {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -94,12 +98,27 @@ namespace SmartStudent {
 			this->linkLabel1->Text = L"Repositories";
 			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &MP::linkLabel1_LinkClicked);
 			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->button1->Location = System::Drawing::Point(556, 99);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(153, 46);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"GPA Calculate";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &MP::button1_Click);
+			// 
 			// MP
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->linkLabel1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -119,5 +138,9 @@ namespace SmartStudent {
     private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
         System::Diagnostics::Process::Start("https://github.com/sasindumal/Smart-Student.git");
     }
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	GpaCalculatorForm^ gpa = gcnew GpaCalculatorForm();
+	gpa->ShowDialog();
+}
 };
 }
